@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { getAllProductsStart } from "../../store/ducks/products/actions";
+import { Link } from "react-router-dom";
 
 const TopNavigation = () => {
   const [current, setCurrent] = useState("products");
@@ -21,10 +22,10 @@ const TopNavigation = () => {
 		setCurrent(menuItem?.key)
 	}} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="products" icon={<ShoppingOutlined/>}>
-        Produtos
+        <Link to="/produtos">Produtos</Link>
       </Menu.Item>
       <Menu.Item key="shoppingCart" icon={<ShoppingCartOutlined/>}>
-        Carrinho
+        <Link to="/carrinho">Carrinho</Link>
       </Menu.Item>
     </Menu>
   );

@@ -1,17 +1,16 @@
 import React from "react";
-import logo from "./logo.svg";
 import { Provider } from "react-redux";
 import "./App.css";
 import { store } from "./app/store";
 import { Col, Row } from "antd";
-import TopNavigation from "./features/topNavigation/TopNavigation";
+import AppRoutes from "./app/appRoutes";
 
 function App() {
   return (
     <Provider store={store}>
-      <Row className="App">
-        <Col>
-          <TopNavigation/>
+      <Row className="App" gutter={[0, 16]}>
+        <Col span={24}>
+          <AppRoutes />
         </Col>
       </Row>
     </Provider>
