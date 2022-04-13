@@ -1,7 +1,8 @@
-import { Card, Col, Row } from "antd";
-import React, { useEffect } from "react";
+import { Card, Col, Image, Row } from "antd";
+import React, { useEffect, useRef } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
+import calculateAspectRatio from "../../helpers/calculateAspectRatio";
 import { StProductsContainer } from "./styled";
 
 const Products = () => {
@@ -22,15 +23,29 @@ const Products = () => {
             <Card
               title={product?.title}
               loading={allProductsLoading}
-              cover={<img alt={product?.title} src={product?.image}></img>}
+              cover={
+                <Image
+                  alt={product?.title}
+                  src={product?.image}
+                  style={{
+                    width: 300,
+                    height: 300,
+                    objectFit: "contain",
+                    objectPosition: "50% 50%",
+                  }}
+                ></Image>
+              }
               bordered
-              style={{ width: 300 }}
               bodyStyle={{
                 textAlign: "left",
               }}
             >
-              <p>{product?.description}</p>
-              <p>{product?.price}</p>
+              <p>
+                {product?.price.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
             </Card>
           }
         </Col>
