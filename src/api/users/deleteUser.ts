@@ -11,9 +11,6 @@ const deleteUser = async (user: any) => {
     })
     .catch((error: any) => {
       console.log("DELETE USER ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

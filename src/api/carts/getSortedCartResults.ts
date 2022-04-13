@@ -11,9 +11,6 @@ const getSortedCartResults = async (sortOrder: string) => {
     })
     .catch((error: any) => {
       console.log("GET SORTED CART RESULTS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

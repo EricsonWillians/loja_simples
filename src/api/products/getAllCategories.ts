@@ -11,9 +11,6 @@ const getAllCategories = async () => {
     })
     .catch((error: any) => {
       console.log("GET ALL CATEGORIES ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

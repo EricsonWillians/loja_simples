@@ -11,9 +11,6 @@ const addANewCart = async (cart: any) => {
     })
     .catch((error: any) => {
       console.log("ADD A NEW CART ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

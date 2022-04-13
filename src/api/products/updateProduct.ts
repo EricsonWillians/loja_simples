@@ -11,9 +11,6 @@ const updateProduct = async (product: any) => {
     })
     .catch((error: any) => {
       console.log("UPDATE PRODUCT ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

@@ -11,9 +11,6 @@ const deleteProduct = async (id: number) => {
     })
     .catch((error: any) => {
       console.log("DELETE PRODUCT ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

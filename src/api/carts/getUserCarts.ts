@@ -11,9 +11,6 @@ const getUserCarts = async (userId: number) => {
     })
     .catch((error: any) => {
       console.log("GET USER CART ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

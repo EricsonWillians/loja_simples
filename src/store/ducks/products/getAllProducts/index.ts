@@ -1,31 +1,36 @@
+import getAllProductsTypes from "./types";
 interface IProductsState {
-    products: any[]
+  products: any[];
 }
 
-const initialState: IProductsState = {
-    products: [],
-}
+const initialState = {
+  products: [],
+  loading: false,
+};
 
 const reducer = (state = initialState, action: any) => {
-    switch (action.type) {
-        case 'GET_ALL_PRODUCTS_START':
-            return {
-                ...state,
-                products: [],
-            }
-        case 'GET_ALL_PRODUCTS_SUCCESS':
-            return {
-                ...state,
-                products: action.payload,
-            }
-        case 'GET_ALL_PRODUCTS_FAILURE':
-            return {
-                ...state,
-                products: [],
-            }
-        default:
-            return state
-    }
-}
+  switch (action.type) {
+    case getAllProductsTypes.GET_ALL_PRODUCTS_START:
+      return {
+        ...state,
+        products: [],
+        loading: true,
+      };
+    case getAllProductsTypes.GET_ALL_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+      };
+    case getAllProductsTypes.GET_ALL_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        products: [],
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
 
 export default reducer;

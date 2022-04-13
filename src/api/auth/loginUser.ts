@@ -11,9 +11,6 @@ const loginUser = async (userCredentials: any) => {
     })
     .catch((error: any) => {
       console.log("LOGIN USER ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

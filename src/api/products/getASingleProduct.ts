@@ -11,9 +11,6 @@ const getASingleProduct = async (id: string) => {
     })
     .catch((error: any) => {
       console.log("GET A SINGLE PRODUCT ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };
