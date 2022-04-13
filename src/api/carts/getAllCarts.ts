@@ -1,16 +1,16 @@
 import axios from "axios";
 import getBaseUrl from "../baseUrl";
 
-const getLimitedResults = async (limit: number) => {
+const getAllCarts = async () => {
   const baseUrl = getBaseUrl();
   const request = axios
-    .get(`${baseUrl}/products?limit=${limit}`)
+    .get(`${baseUrl}/carts`)
     .then((response: any) => {
-      console.log("GET LIMITED RESULTS RESPONSE: ", response);
+      console.log("GET ALL CARTS RESPONSE: ", response);
       return response;
     })
     .catch((error: any) => {
-      console.log("GET LIMITED RESULTS ERROR", error);
+      console.log("GET ALL CARTS ERROR", error);
     })
     .then(() => {
       // always executed
@@ -18,4 +18,4 @@ const getLimitedResults = async (limit: number) => {
   return await request;
 };
 
-export default getLimitedResults;
+export default getAllCarts;
