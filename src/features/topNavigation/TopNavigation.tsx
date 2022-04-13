@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
-import {
-  ShoppingOutlined,
-  ShoppingCartOutlined
-} from "@ant-design/icons";
+import { ShoppingOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { getAllProductsStart } from "../../store/ducks/products/actions";
+import { getAllProductsStart } from "../../store/ducks/products/getAllProducts/actions";
 import { Link } from "react-router-dom";
 
 const TopNavigation = () => {
@@ -18,17 +15,21 @@ const TopNavigation = () => {
   }, []);
 
   return (
-    <Menu onClick={(menuItem) => {
-		setCurrent(menuItem?.key)
-	}} selectedKeys={[current]} mode="horizontal">
-      <Menu.Item key="products" icon={<ShoppingOutlined/>}>
+    <Menu
+      onClick={(menuItem) => {
+        setCurrent(menuItem?.key);
+      }}
+      selectedKeys={[current]}
+      mode="horizontal"
+    >
+      <Menu.Item key="products" icon={<ShoppingOutlined />}>
         <Link to="/produtos">Produtos</Link>
       </Menu.Item>
-      <Menu.Item key="shoppingCart" icon={<ShoppingCartOutlined/>}>
+      <Menu.Item key="shoppingCart" icon={<ShoppingCartOutlined />}>
         <Link to="/carrinho">Carrinho</Link>
       </Menu.Item>
     </Menu>
   );
-}
+};
 
 export default TopNavigation;

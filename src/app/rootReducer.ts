@@ -1,11 +1,9 @@
-import { combineReducers } from 'redux';
-import { History } from 'history';
+import { combineReducers } from "redux";
+import getAllProductsReducer from "../store/ducks/products/getAllProducts";
 
-import { connectRouter } from 'connected-react-router';
-import productsReducer from '../store/ducks/products';
-
-const rootReducer = () => combineReducers({
-  products: productsReducer,
-});
+const rootReducer = () =>
+  combineReducers({
+    getAllProducts: getAllProductsReducer,
+  });
 
 export default rootReducer;
