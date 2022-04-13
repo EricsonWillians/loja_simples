@@ -2,6 +2,7 @@ import { Card, Col, Row } from "antd";
 import React, { useEffect } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { RootState } from "../../app/store";
+import { StProductsContainer } from "./styled";
 
 const Products = () => {
   const allProducts = useAppSelector((state) => state.getAllProducts.products);
@@ -22,7 +23,11 @@ const Products = () => {
               title={product?.title}
               loading={allProductsLoading}
               cover={<img alt={product?.title} src={product?.image}></img>}
+              bordered
               style={{ width: 300 }}
+              bodyStyle={{
+                textAlign: "left",
+              }}
             >
               <p>{product?.description}</p>
               <p>{product?.price}</p>
@@ -33,7 +38,7 @@ const Products = () => {
     });
   };
 
-  return <Row gutter={16}>{renderCards()}</Row>;
+  return <StProductsContainer gutter={16}>{renderCards()}</StProductsContainer>;
 };
 
 export default Products;
