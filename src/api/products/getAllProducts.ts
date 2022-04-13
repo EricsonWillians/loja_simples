@@ -3,7 +3,7 @@ import getBaseUrl from "../baseUrl";
 
 const getAllProducts = async () => {
   const baseUrl = getBaseUrl();
-  const request = axios
+  const request = await axios
     .get(`${baseUrl}/products`)
     .then((response: any) => {
       console.log("GET ALL PRODUCTS RESPONSE: ", response);
@@ -11,11 +11,8 @@ const getAllProducts = async () => {
     })
     .catch((error: any) => {
       console.log("GET ALL PRODUCTS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
-  return await request;
+  return request;
 };
 
 export default getAllProducts;

@@ -11,9 +11,6 @@ const addNewProduct = async (product: any) => {
     })
     .catch((error: any) => {
       console.log("ADD NEW PRODUCT ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

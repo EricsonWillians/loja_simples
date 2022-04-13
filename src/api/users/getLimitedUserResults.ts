@@ -11,9 +11,6 @@ const getLimitedUserResults = async (limit: number) => {
     })
     .catch((error: any) => {
       console.log("GET LIMITED USER RESULTS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

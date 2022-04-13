@@ -11,9 +11,6 @@ const getAllUsers = async () => {
     })
     .catch((error: any) => {
       console.log("GET ALL USERS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

@@ -11,9 +11,6 @@ const getLimitedProductResults = async (limit: number) => {
     })
     .catch((error: any) => {
       console.log("GET LIMITED PRODUCT RESULTS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

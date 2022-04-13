@@ -11,9 +11,6 @@ const getASingleCart = async (id: number) => {
     })
     .catch((error: any) => {
       console.log("GET A SINGLE CART ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

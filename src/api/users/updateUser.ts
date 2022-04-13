@@ -11,9 +11,6 @@ const updateUser = async (user: any) => {
     })
     .catch((error: any) => {
       console.log("UPDATE USER ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

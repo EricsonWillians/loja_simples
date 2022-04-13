@@ -11,9 +11,6 @@ const getInCategory = async (category: string) => {
     })
     .catch((error: any) => {
       console.log("GET IN CATEGORY ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

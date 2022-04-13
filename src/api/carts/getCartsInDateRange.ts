@@ -11,9 +11,6 @@ const getCartsInDateRage = async (startDate: string, endDate: string) => {
     })
     .catch((error: any) => {
       console.log("GET CARTS IN RANGE ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

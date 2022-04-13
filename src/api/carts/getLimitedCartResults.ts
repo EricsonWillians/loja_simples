@@ -11,9 +11,6 @@ const getLimitedCartResults = async (limit: number) => {
     })
     .catch((error: any) => {
       console.log("GET LIMITED CART RESULTS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

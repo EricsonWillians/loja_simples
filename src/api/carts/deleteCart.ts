@@ -11,9 +11,6 @@ const deleteCart = async (cart: any) => {
     })
     .catch((error: any) => {
       console.log("DELETE CART ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

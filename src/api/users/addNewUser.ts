@@ -11,9 +11,6 @@ const addNewUser = async (user: any) => {
     })
     .catch((error: any) => {
       console.log("ADD A NEW USER ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

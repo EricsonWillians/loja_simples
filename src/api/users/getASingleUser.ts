@@ -11,9 +11,6 @@ const getASingleUser = async (user: any) => {
     })
     .catch((error: any) => {
       console.log("GET A SINGLE USER ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

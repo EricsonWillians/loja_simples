@@ -11,9 +11,6 @@ const getAllCarts = async () => {
     })
     .catch((error: any) => {
       console.log("GET ALL CARTS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };

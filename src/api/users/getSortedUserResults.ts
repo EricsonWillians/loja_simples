@@ -11,9 +11,6 @@ const getSortedUserResults = async (sortOrder: string) => {
     })
     .catch((error: any) => {
       console.log("GET SORTED USER RESULTS ERROR", error);
-    })
-    .then(() => {
-      // always executed
     });
   return await request;
 };
