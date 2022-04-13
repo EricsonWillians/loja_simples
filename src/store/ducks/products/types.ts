@@ -1,0 +1,7 @@
+const types = {
+    GET_ALL_PRODUCTS_START: '@products/GET_ALL_PRODUCTS_START',
+    GET_ALL_PRODUCTS_SUCCESS: '@products/GET_ALL_PRODUCTS_SUCCESS',
+    GET_ALL_PRODUCTS_FAILURE: '@products/GET_ALL_PRODUCTS_FAILURE',
+}
+
+export default types;
