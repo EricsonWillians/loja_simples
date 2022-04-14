@@ -1,10 +1,11 @@
 import axios from "axios";
+import { IGetASingleProductStartAction } from "../../store/ducks/products/getASingleProduct/types";
 import getBaseUrl from "../baseUrl";
 
-const getASingleProduct = async (id: string) => {
+const getASingleProduct = async (payload: IGetASingleProductStartAction) => {
   const baseUrl = getBaseUrl();
   const request = axios
-    .get(`${baseUrl}/products/${id}`)
+    .get(`${baseUrl}/products/${payload?.id}`)
     .then((response: any) => {
       console.log("GET A SINGLE PRODUCT RESPONSE: ", response);
       return response;

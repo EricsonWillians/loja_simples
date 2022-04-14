@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Card, Col, Image, Row, Tooltip } from "antd";
 import StarRatingComponent from "react-star-rating-component";
+import { useDispatch } from "react-redux";
+import getASingleProduct from "../../api/products/getASingleProduct";
+import { getASingleProductStart } from "../../store/ducks/products/getASingleProduct/actions";
+import { useAppSelector } from "../../app/hooks";
 
 const DetailedProduct = () => {
+  const dispatch = useDispatch();
+
+  const singleProduct = useAppSelector(
+    (state) => state.getASingleProduct.product
+  );
+  const singleProductLoading = useAppSelector(
+    (state) => state.getAllProducts.loading
+  );
+
+  useEffect(() => {
+    const productId = window.location.pathname.split("/").slice(-1)[0];
+    dispatch(getASingleProductStart(productId));
+  }, []);
+
+  useEffect(() => {
+    console.log("SINGLE PRODUCT", singleProduct);
+  }, [singleProduct]);
+
   return (
     <Row>
       <Col span={12}>
-        {/* <Card
-          title={product?.title}
-          loading={allProductsLoading}
+        <Card
+          title={singleProduct?.title}
+          loading={singleProductLoading}
           cover={
             <Image
-              alt={product?.title}
-              src={product?.image}
-              preview={false}
+              alt={singleProduct?.title}
+              src={singleProduct?.image}
               style={{
                 width: 300,
                 height: 300,
                 objectFit: "contain",
                 objectPosition: "50% 50%",
               }}
-              onClick={() => navigate(`/product/${product?.id}`)}
             ></Image>
           }
           bordered
@@ -32,7 +52,7 @@ const DetailedProduct = () => {
           <Row justify="space-between">
             <Col>
               <p>
-                {product?.price.toLocaleString("pt-br", {
+                {singleProduct?.price?.toLocaleString("pt-br", {
                   style: "currency",
                   currency: "BRL",
                 })}
@@ -43,18 +63,17 @@ const DetailedProduct = () => {
                 <StarRatingComponent
                   name="Avaliação"
                   starCount={5}
-                  value={product?.rating?.rate}
+                  value={singleProduct?.rating?.rate}
                 />
               </Col>
               <Col span={6}>
                 <Tooltip title="Avaliações">
-                  <span>({product?.rating?.count})</span>
+                  <span>({singleProduct?.rating?.count})</span>
                 </Tooltip>
               </Col>
             </Row>
           </Row>
-        </Card> */}
-        <p>Card :)</p>
+        </Card>
       </Col>
     </Row>
   );

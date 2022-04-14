@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { ShoppingOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
-import { getAllProductsStart } from "../../store/ducks/products/getAllProducts/actions";
 import { Link } from "react-router-dom";
 
 const TopNavigation = () => {
   const [current, setCurrent] = useState("products");
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAllProductsStart());
-  }, []);
 
   return (
     <Menu

@@ -4,14 +4,21 @@ import { useAppSelector } from "../../app/hooks";
 import { StProductsContainer } from "./styled";
 import StarRatingComponent from "react-star-rating-component";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getAllProductsStart } from "../../store/ducks/products/getAllProducts/actions";
 
 const Products = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const allProducts = useAppSelector((state) => state.getAllProducts.products);
   const allProductsLoading = useAppSelector(
     (state) => state.getAllProducts.loading
   );
+
+  useEffect(() => {
+    dispatch(getAllProductsStart());
+  }, []);
 
   useEffect(() => {
     console.log("ALL PRODUCTS", allProducts);
