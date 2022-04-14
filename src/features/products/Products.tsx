@@ -1,10 +1,13 @@
-import { Card, Col, Image, Row } from "antd";
+import { Card, Col, Image, Row, Tooltip } from "antd";
 import React, { useEffect, useRef } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { StProductsContainer } from "./styled";
 import StarRatingComponent from "react-star-rating-component";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
+  const navigate = useNavigate();
+
   const allProducts = useAppSelector((state) => state.getAllProducts.products);
   const allProductsLoading = useAppSelector(
     (state) => state.getAllProducts.loading
@@ -26,12 +29,14 @@ const Products = () => {
                 <Image
                   alt={product?.title}
                   src={product?.image}
+                  preview={false}
                   style={{
                     width: 300,
                     height: 300,
                     objectFit: "contain",
                     objectPosition: "50% 50%",
                   }}
+                  onClick={() => navigate(`/produto/${product?.id}`)}
                 ></Image>
               }
               bordered
@@ -57,7 +62,9 @@ const Products = () => {
                     />
                   </Col>
                   <Col span={6}>
-                    <p> ({product?.rating?.count})</p>
+                    <Tooltip title="Avaliações">
+                      <span>({product?.rating?.count})</span>
+                    </Tooltip>
                   </Col>
                 </Row>
               </Row>
