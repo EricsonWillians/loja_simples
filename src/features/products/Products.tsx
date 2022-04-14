@@ -1,9 +1,8 @@
 import { Card, Col, Image, Row } from "antd";
 import React, { useEffect, useRef } from "react";
 import { useAppSelector } from "../../app/hooks";
-import { RootState } from "../../app/store";
-import calculateAspectRatio from "../../helpers/calculateAspectRatio";
 import { StProductsContainer } from "./styled";
+import StarRatingComponent from "react-star-rating-component";
 
 const Products = () => {
   const allProducts = useAppSelector((state) => state.getAllProducts.products);
@@ -40,12 +39,28 @@ const Products = () => {
                 textAlign: "left",
               }}
             >
-              <p>
-                {product?.price.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </p>
+              <Row justify="space-between">
+                <Col>
+                  <p>
+                    {product?.price.toLocaleString("pt-br", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
+                  </p>
+                </Col>
+                <Row>
+                  <Col span={18}>
+                    <StarRatingComponent
+                      name="Avaliação"
+                      starCount={5}
+                      value={product?.rating?.rate}
+                    />
+                  </Col>
+                  <Col span={6}>
+                    <p> ({product?.rating?.count})</p>
+                  </Col>
+                </Row>
+              </Row>
             </Card>
           }
         </Col>
