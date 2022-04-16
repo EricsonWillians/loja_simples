@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { getAllProductsStart } from "../../store/ducks/products/getAllProducts/actions";
 import IProduct from "../../types/ProductType";
 import ProductCard from "../../common/productCard/ProductCard";
+import SpinContainer from "../../common/spinContainer/SpinContainer";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,15 @@ const Products = () => {
     });
   };
 
-  return <StProductsContainer gutter={16}>{renderCards()}</StProductsContainer>;
+  return (
+    <>
+      {allProductsLoading ? (
+        <SpinContainer />
+      ) : (
+        <StProductsContainer gutter={16}>{renderCards()}</StProductsContainer>
+      )}
+    </>
+  );
 };
 
 export default Products;
