@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Card, Col, Image, Row, Tooltip } from "antd";
+import { Button, Card, Col, Image, Row, Tooltip, Typography } from "antd";
 import StarRatingComponent from "react-star-rating-component";
 import { useDispatch } from "react-redux";
 import getASingleProduct from "../../api/products/getASingleProduct";
 import { getASingleProductStart } from "../../store/ducks/products/getASingleProduct/actions";
 import { useAppSelector } from "../../app/hooks";
+import ProductCard from "../../common/productCard/ProductCard";
+import { StProductsContainer } from "../../common/productCard/styled";
+import ShoppingCartOutlined from "@ant-design/icons";
 
 const DetailedProduct = () => {
   const dispatch = useDispatch();
@@ -27,55 +30,66 @@ const DetailedProduct = () => {
   }, [singleProduct]);
 
   return (
-    <Row>
+    <StProductsContainer gutter={32} justify="start">
       <Col span={12}>
-        <Card
-          title={singleProduct?.title}
-          loading={singleProductLoading}
-          cover={
-            <Image
-              alt={singleProduct?.title}
-              src={singleProduct?.image}
-              style={{
-                width: 300,
-                height: 300,
-                objectFit: "contain",
-                objectPosition: "50% 50%",
-              }}
-            ></Image>
-          }
-          bordered
-          bodyStyle={{
-            textAlign: "left",
-          }}
-        >
-          <Row justify="space-between">
-            <Col>
-              <p>
-                {singleProduct?.price?.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </p>
-            </Col>
-            <Row>
-              <Col span={18}>
-                <StarRatingComponent
-                  name="Avaliação"
-                  starCount={5}
-                  value={singleProduct?.rating?.rate}
-                />
-              </Col>
-              <Col span={6}>
-                <Tooltip title="Avaliações">
-                  <span>({singleProduct?.rating?.count})</span>
-                </Tooltip>
-              </Col>
-            </Row>
-          </Row>
-        </Card>
+        <ProductCard
+          product={singleProduct}
+          isLoading={singleProductLoading}
+          isDetailed
+        />
       </Col>
-    </Row>
+      <Col span={8}>
+        <Row justify="start">
+          <Col span={24}>
+            <p
+              style={{
+                textAlign: "justify",
+                fontSize: "1.3rem",
+              }}
+            >
+              {singleProduct?.description}
+            </p>
+          </Col>
+          <Col span={4}>
+            <StarRatingComponent
+              name="Avaliação"
+              starCount={5}
+              value={singleProduct?.rating?.rate}
+            />
+          </Col>
+          <Col span={2}>
+            <Tooltip title="Avaliações">
+              <span>({singleProduct?.rating?.count})</span>
+            </Tooltip>
+          </Col>
+        </Row>
+      </Col>
+      <Col span={4}>
+        <Row gutter={[0, 12]}>
+          <Col span={24}>
+            <Button
+              style={{
+                width: "100%",
+              }}
+              type="primary"
+              icon={<ShoppingCartOutlined />}
+            >
+              Adicionar ao carrinho
+            </Button>
+          </Col>
+          <Col span={24}>
+            <Button
+              style={{
+                width: "100%",
+              }}
+              type="primary"
+            >
+              Comprar agora
+            </Button>
+          </Col>
+        </Row>
+      </Col>
+    </StProductsContainer>
   );
 };
 
