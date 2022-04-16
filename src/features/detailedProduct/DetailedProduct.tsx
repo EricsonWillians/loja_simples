@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Button, Card, Col, Image, Row, Tooltip, Typography } from "antd";
+import { Button, Col, Row, Select, Tooltip, InputNumber } from "antd";
 import StarRatingComponent from "react-star-rating-component";
 import { useDispatch } from "react-redux";
 import getASingleProduct from "../../api/products/getASingleProduct";
@@ -14,6 +14,7 @@ import SpinContainer from "../../common/spinContainer/SpinContainer";
 
 const DetailedProduct = () => {
   const dispatch = useDispatch();
+  const { Option } = Select;
 
   const singleProduct = useAppSelector(
     (state) => state.getASingleProduct.product
@@ -71,7 +72,19 @@ const DetailedProduct = () => {
             </Row>
           </Col>
           <Col span={4}>
-            <Row gutter={[0, 12]}>
+            <Row gutter={[8, 12]} justify="space-between" align="middle">
+              <Col span={4}>
+                <span>Qtd.</span>
+              </Col>
+              <Col span={20}>
+                <InputNumber
+                  min={1}
+                  max={10}
+                  defaultValue={3}
+                  onChange={() => {}}
+                  style={{ width: "90%" }}
+                />
+              </Col>
               <Col span={24}>
                 <Button
                   style={{
