@@ -1,4 +1,4 @@
-A simple store that I developed using React with Redux / Redux Saga for state management, Typescript, Styled Components and the React Testing Library.
+A simple store that I developed using React with [Redux](https://redux.js.org/) / [Redux Saga](https://redux-saga.js.org/) for state management, [Typescript](https://www.typescriptlang.org/), [Styled Components](https://styled-components.com/) and the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). For the design-system, I've used [Ant Design](https://ant.design/).
 
 # [LIVE DEMO](https://ericsonwillians.github.io/loja_simples/)
 
