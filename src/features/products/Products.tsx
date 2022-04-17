@@ -15,6 +15,9 @@ const Products = () => {
   const allProductsLoading = useAppSelector(
     (state) => state.getAllProducts.loading
   );
+  const allProductsError = useAppSelector(
+    (state) => state.getAllProducts.error
+  );
 
   useEffect(() => {
     dispatch(getAllProductsStart());
@@ -41,7 +44,15 @@ const Products = () => {
       {allProductsLoading ? (
         <SpinContainer />
       ) : (
-        <StProductsContainer gutter={16}>{renderCards()}</StProductsContainer>
+        <>
+          {allProductsError ? (
+            <h1>Erro na API :(</h1>
+          ) : (
+            <StProductsContainer gutter={16}>
+              {renderCards()}
+            </StProductsContainer>
+          )}
+        </>
       )}
     </>
   );

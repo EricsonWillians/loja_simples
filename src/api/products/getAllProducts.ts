@@ -11,6 +11,7 @@ const getAllProducts = async () => {
     })
     .catch((error: any) => {
       console.log("GET ALL PRODUCTS ERROR", error);
+      return error.response;
     });
   return request;
 };

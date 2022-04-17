@@ -13,6 +13,7 @@ import ShoppingCartOutlined from "@ant-design/icons";
 import SpinContainer from "../../common/spinContainer/SpinContainer";
 import { updateCartStart } from "../../store/ducks/carts/updateCart/actions";
 import moment from "moment";
+import getDefaultUserId from "../../helpers/getDefaultUserId";
 
 const DetailedProduct = () => {
   const dispatch = useDispatch();
@@ -103,7 +104,7 @@ const DetailedProduct = () => {
                   onClick={() => {
                     dispatch(
                       updateCartStart(
-                        productId,
+                        getDefaultUserId(),
                         moment().format("YYYY-MM-DD"),
                         [
                           {

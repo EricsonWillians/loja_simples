@@ -5,7 +5,11 @@ import { getAllProductsFailure, getAllProductsSuccess } from "./actions";
 export const getAllProductsSaga = function* (): any {
   try {
     const response = yield call(getAllProducts);
-    yield put(getAllProductsSuccess(response.data));
+    if (response?.status !== 200) {
+      yield put(getAllProductsFailure());
+    } else {
+      yield put(getAllProductsSuccess(response.data));
+    }
   } catch (err) {
     yield put(getAllProductsFailure());
   }

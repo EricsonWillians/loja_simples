@@ -1,10 +1,11 @@
 import axios from "axios";
+import { IGetASingleCartStartAction } from "../../store/ducks/carts/getASingleCart/types";
 import getBaseUrl from "../baseUrl";
 
-const getASingleCart = async (id: number) => {
+const getASingleCart = async (payload: IGetASingleCartStartAction) => {
   const baseUrl = getBaseUrl();
   const request = axios
-    .get(`${baseUrl}/carts/${id}`)
+    .get(`${baseUrl}/carts/${payload?.id}`)
     .then((response: any) => {
       console.log("GET A SINGLE CART RESPONSE: ", response);
       return response;

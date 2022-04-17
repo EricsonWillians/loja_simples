@@ -7,6 +7,8 @@ import { useAppSelector } from "../../app/hooks";
 import { StProductsContainer } from "../../common/productCard/styled";
 import SpinContainer from "../../common/spinContainer/SpinContainer";
 import { StSpinContainer } from "../../common/spinContainer/styled";
+import getDefaultCartId from "../../helpers/getDefaultCartId";
+import { getASingleCartStart } from "../../store/ducks/carts/getASingleCart/actions";
 import { getUserCartsStart } from "../../store/ducks/carts/getUserCarts/actions";
 import { getAllProductsStart } from "../../store/ducks/products/getAllProducts/actions";
 import { getASingleProductStart } from "../../store/ducks/products/getASingleProduct/actions";
@@ -21,30 +23,38 @@ const ShoppingCart = () => {
   const userCartsLoading = useAppSelector(
     (state) => state.getAllProducts.loading
   );
+  const singleCart = useAppSelector((state) => state.getASingleCart.cart);
+  const singleCartLoading = useAppSelector(
+    (state) => state.getASingleCart.loading
+  );
   const allProducts = useAppSelector((state) => state.getAllProducts.products);
+  const allProductsLoading = useAppSelector(
+    (state) => state.getAllProducts.loading
+  );
 
   // Using just "recent" products since there's no time,
   // to implement a whole cart history system
   const [recentCart, setRecentCart] = useState({} as ICart);
   const [recentProducts, setRecentProducts] = useState([] as IProduct[]);
 
-  // Using a default one since I'm not sure I'll have time to implement
-  // the whole user sign up / login system
-  const defaultUserId = "1";
-
   useEffect(() => {
     dispatch(getAllProductsStart());
   }, []);
 
   useEffect(() => {
-    dispatch(getUserCartsStart(defaultUserId));
+    /* dispatch(getUserCartsStart(defaultUserId)); */
+    dispatch(getASingleCartStart(getDefaultCartId()));
   }, [allProducts]);
 
   useEffect(() => {
+    setRecentCart(singleCart);
+  }, [singleCart]);
+
+  /* useEffect(() => {
     if (userCarts?.length > 0) {
       setRecentCart(userCarts.slice(-1)[0]);
     }
-  }, [userCarts]);
+  }, [userCarts]); */
 
   const getCartProductInfo = (productId: string) => {
     const product = allProducts.find(
@@ -64,7 +74,6 @@ const ShoppingCart = () => {
         );
         if (cartProducts?.length > 0) {
           if (!cartProducts.some((element) => element === undefined)) {
-            console.log("THE CART PRODUCTS", cartProducts);
             setRecentProducts(cartProducts);
           }
         }
@@ -78,8 +87,8 @@ const ShoppingCart = () => {
 
   return (
     <>
-      {userCartsLoading ? (
-        <StSpinContainer />
+      {userCartsLoading || singleCartLoading || allProductsLoading ? (
+        <SpinContainer />
       ) : (
         <StProductsContainer>
           <Col span={24}>
