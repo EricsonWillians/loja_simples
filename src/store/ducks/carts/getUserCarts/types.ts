@@ -1,7 +1,7 @@
 import { Action } from "@reduxjs/toolkit";
 
 export interface IGetUserCartsStartAction extends Action {
-  type: "@products/GET_USER_CARTS_START";
+  type: "@carts/GET_USER_CARTS_START";
 }
 
 export interface IGetUserCartsStartAction {

@@ -12,6 +12,11 @@ import getUserCartsTypes, {
 } from "../store/ducks/carts/getUserCarts/types";
 import { getUserCartsSaga } from "../store/ducks/carts/getUserCarts/sagas";
 
+import updateCartTypes, {
+  IUpdateCartStartAction,
+} from "../store/ducks/carts/updateCart/types";
+import { updateCartSaga } from "../store/ducks/carts/updateCart/sagas";
+
 export default function* rootSaga() {
   yield all([
     takeEvery(getAllProductsTypes.GET_ALL_PRODUCTS_START, getAllProductsSaga),
@@ -22,6 +27,10 @@ export default function* rootSaga() {
     takeEvery<IGetASingleProductStartAction>(
       getASingleProductTypes.GET_A_SINGLE_PRODUCT_START,
       getASingleProductSaga
+    ),
+    takeEvery<IUpdateCartStartAction>(
+      updateCartTypes.UPDATE_CART_START,
+      updateCartSaga
     ),
   ]);
 }
