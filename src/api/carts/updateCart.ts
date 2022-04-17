@@ -1,10 +1,19 @@
 import axios from "axios";
+import { IProductForUpdate } from "../../types/ProductType";
 import getBaseUrl from "../baseUrl";
 
-const updateCart = async (cart: any) => {
+const updateCart = async (
+  userId: string | undefined,
+  date: string | undefined,
+  products: IProductForUpdate[]
+) => {
   const baseUrl = getBaseUrl();
   const request = axios
-    .put(`${baseUrl}/carts/${cart.id}`, cart)
+    .put(`${baseUrl}/carts/1`, {
+      userId,
+      date,
+      products,
+    })
     .then((response: any) => {
       console.log("UPDATE CART RESPONSE: ", response);
       return response;

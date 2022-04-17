@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Col, Row, Select, Tooltip, InputNumber } from "antd";
 import StarRatingComponent from "react-star-rating-component";
@@ -11,6 +11,8 @@ import { StProductsContainer } from "../../common/productCard/styled";
 import Icon from "@ant-design/icons";
 import ShoppingCartOutlined from "@ant-design/icons";
 import SpinContainer from "../../common/spinContainer/SpinContainer";
+import { updateCartStart } from "../../store/ducks/carts/updateCart/actions";
+import moment from "moment";
 
 const DetailedProduct = () => {
   const dispatch = useDispatch();
@@ -23,9 +25,13 @@ const DetailedProduct = () => {
     (state) => state.getASingleProduct.loading
   );
 
+  const [productId, setProductId] = useState("1");
+  const [quantity, setQuantity] = useState(1);
+
   useEffect(() => {
-    const productId = window.location.pathname.split("/").slice(-1)[0];
-    dispatch(getASingleProductStart(productId));
+    const urlProductId = window.location.pathname.split("/").slice(-1)[0];
+    setProductId(urlProductId);
+    dispatch(getASingleProductStart(urlProductId));
   }, []);
 
   useEffect(() => {
@@ -81,7 +87,9 @@ const DetailedProduct = () => {
                   min={1}
                   max={10}
                   defaultValue={3}
-                  onChange={() => {}}
+                  onChange={(value: number) => {
+                    setQuantity(value);
+                  }}
                   style={{ width: "90%" }}
                 />
               </Col>
@@ -92,6 +100,20 @@ const DetailedProduct = () => {
                   }}
                   type="primary"
                   icon={<ShoppingCartOutlined />}
+                  onClick={() => {
+                    dispatch(
+                      updateCartStart(
+                        productId,
+                        moment().format("YYYY-MM-DD"),
+                        [
+                          {
+                            productId,
+                            quantity,
+                          },
+                        ]
+                      )
+                    );
+                  }}
                 >
                   Adicionar ao carrinho
                 </Button>

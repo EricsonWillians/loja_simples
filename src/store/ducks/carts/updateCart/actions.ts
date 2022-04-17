@@ -1,9 +1,9 @@
-import IProduct from "../../../../types/ProductType";
+import { IProductForUpdate } from "../../../../types/ProductType";
 
 export const updateCartStart = (
   userId: string | undefined,
   date: string | undefined,
-  products: IProduct[]
+  products: IProductForUpdate[]
 ) => ({
   type: "@carts/UPDATE_CART_START",
   userId,

@@ -1,5 +1,5 @@
 import { Action } from "@reduxjs/toolkit";
-import IProduct from "../../../../types/ProductType";
+import { IProductForUpdate } from "../../../../types/ProductType";
 
 export interface IUpdateCartStartAction extends Action {
   type: "@carts/UPDATE_CART_START";
@@ -8,7 +8,7 @@ export interface IUpdateCartStartAction extends Action {
 export interface IUpdateCartStartAction {
   userId: string | undefined;
   date: string | undefined;
-  products: IProduct[];
+  products: IProductForUpdate[];
 }
 
 const types = {

@@ -13,4 +13,9 @@ interface IProduct {
   title: string;
 }
 
+export interface IProductForUpdate {
+  productId: string;
+  quantity: number;
+}
+
 export default IProduct;
