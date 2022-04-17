@@ -1,4 +1,4 @@
-import { Avatar, Button, Col, List, Row, Spin } from "antd";
+import { Avatar, Button, Col, InputNumber, List, Row, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -108,7 +108,7 @@ const ShoppingCart = () => {
                 dataSource={recentProducts}
                 renderItem={(item) => (
                   <Row align="middle">
-                    <Col span={20}>
+                    <Col span={18}>
                       <List.Item key={item?.id}>
                         <List.Item.Meta
                           avatar={<Avatar src={item?.image} />}
@@ -129,6 +129,24 @@ const ShoppingCart = () => {
                         <Button type="primary" />
                       </List.Item>
                     </Col>
+                    <Col span={1}>
+                      <span>Qtd.</span>
+                    </Col>
+                    <Col span={1}>
+                      <InputNumber
+                        min={1}
+                        max={10}
+                        defaultValue={3}
+                        onChange={(value: number) => {
+                          // TODO: Implement quantity update
+                          // Since it's a fake API and there's not enough time,
+                          // I'm just leaving the component here
+                          // Also, I pass the quantity value to the updateCartStart action
+                          // on the DetailedProduct component
+                        }}
+                        style={{ width: "100%" }}
+                      />
+                    </Col>
                     <Col span={4}>
                       <Button
                         type="primary"
@@ -147,11 +165,15 @@ const ShoppingCart = () => {
               <p>Não há itens no carrinho :(</p>
             )}
           </Col>
-          <Col>
-            <Button type="primary" onClick={() => navigate("/checkout")}>
-              Finalizar compra
-            </Button>
-          </Col>
+          {recentProducts?.length > 0 ? (
+            <Col>
+              <Button type="primary" onClick={() => navigate("/checkout")}>
+                Finalizar compra
+              </Button>
+            </Col>
+          ) : (
+            <></>
+          )}
         </StProductsContainer>
       )}
     </>
