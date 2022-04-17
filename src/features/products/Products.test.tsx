@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import App from "./App";
+import Products from "./Products";
 
 window.matchMedia =
   window.matchMedia ||
@@ -12,6 +12,7 @@ window.matchMedia =
     };
   };
 
-test("renders the app", () => {
-  const renderedApp = render(<App />);
+test("renders the products screen", () => {
+  const renderedApp = render(<Products />);
+  /* const productsAnchorNode = screen.getByText("/produtos"); */
 });

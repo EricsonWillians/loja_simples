@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Col, Row, Select, Tooltip, InputNumber } from "antd";
+import {
+  Button,
+  Col,
+  Row,
+  Select,
+  Tooltip,
+  InputNumber,
+  notification,
+} from "antd";
 import StarRatingComponent from "react-star-rating-component";
 import { useDispatch } from "react-redux";
 import getASingleProduct from "../../api/products/getASingleProduct";
@@ -14,9 +22,12 @@ import SpinContainer from "../../common/spinContainer/SpinContainer";
 import { updateCartStart } from "../../store/ducks/carts/updateCart/actions";
 import moment from "moment";
 import getDefaultUserId from "../../helpers/getDefaultUserId";
+import getDefaultDate from "../../helpers/getDefaultDate";
+import { useNavigate } from "react-router-dom";
 
 const DetailedProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { Option } = Select;
 
   const singleProduct = useAppSelector(
@@ -34,10 +45,6 @@ const DetailedProduct = () => {
     setProductId(urlProductId);
     dispatch(getASingleProductStart(urlProductId));
   }, []);
-
-  useEffect(() => {
-    console.log("SINGLE PRODUCT Loading", singleProductLoading);
-  }, [singleProductLoading]);
 
   return (
     <>
@@ -102,17 +109,18 @@ const DetailedProduct = () => {
                   type="primary"
                   icon={<ShoppingCartOutlined />}
                   onClick={() => {
+                    notification.success({
+                      message: "Produto adicionado ao carrinho!",
+                      description:
+                        "O produto foi adicionado ao carrinho com sucesso!",
+                    });
                     dispatch(
-                      updateCartStart(
-                        getDefaultUserId(),
-                        moment().format("YYYY-MM-DD"),
-                        [
-                          {
-                            productId,
-                            quantity,
-                          },
-                        ]
-                      )
+                      updateCartStart(getDefaultUserId(), getDefaultDate(), [
+                        {
+                          productId,
+                          quantity,
+                        },
+                      ])
                     );
                   }}
                 >
@@ -125,6 +133,9 @@ const DetailedProduct = () => {
                     width: "100%",
                   }}
                   type="primary"
+                  onClick={() => {
+                    navigate("/checkout");
+                  }}
                 >
                   Comprar agora
                 </Button>

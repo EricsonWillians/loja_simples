@@ -15,6 +15,7 @@ const AppRoutes = () => {
         <Route path="/produtos" element={<Products />} />
         <Route path="/produto/:id" element={<DetailedProduct />} />
         <Route path="/carrinho" element={<ShoppingCart />} />
+        <Route path="/checkout" element={<p>Você realizou uma compra :)</p>} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,4 @@
-import { Avatar, Col, List, Spin } from "antd";
+import { Avatar, Button, Col, List, Row, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,11 @@ import { StProductsContainer } from "../../common/productCard/styled";
 import SpinContainer from "../../common/spinContainer/SpinContainer";
 import { StSpinContainer } from "../../common/spinContainer/styled";
 import getDefaultCartId from "../../helpers/getDefaultCartId";
+import getDefaultDate from "../../helpers/getDefaultDate";
+import getDefaultUserId from "../../helpers/getDefaultUserId";
 import { getASingleCartStart } from "../../store/ducks/carts/getASingleCart/actions";
 import { getUserCartsStart } from "../../store/ducks/carts/getUserCarts/actions";
+import { updateCartStart } from "../../store/ducks/carts/updateCart/actions";
 import { getAllProductsStart } from "../../store/ducks/products/getAllProducts/actions";
 import { getASingleProductStart } from "../../store/ducks/products/getASingleProduct/actions";
 import ICart from "../../types/CartType";
@@ -42,19 +45,12 @@ const ShoppingCart = () => {
   }, []);
 
   useEffect(() => {
-    /* dispatch(getUserCartsStart(defaultUserId)); */
     dispatch(getASingleCartStart(getDefaultCartId()));
   }, [allProducts]);
 
   useEffect(() => {
     setRecentCart(singleCart);
   }, [singleCart]);
-
-  /* useEffect(() => {
-    if (userCarts?.length > 0) {
-      setRecentCart(userCarts.slice(-1)[0]);
-    }
-  }, [userCarts]); */
 
   const getCartProductInfo = (productId: string) => {
     const product = allProducts.find(
@@ -66,7 +62,6 @@ const ShoppingCart = () => {
   useEffect(() => {
     if (recentCart?.products) {
       if (recentCart?.products?.length > 0) {
-        console.log("recentCart.products", recentCart.products);
         const cartProducts = recentCart.products.map(
           ({ productId }: any): IProduct => {
             return getCartProductInfo(productId);
@@ -81,45 +76,81 @@ const ShoppingCart = () => {
     }
   }, [recentCart, allProducts]);
 
-  useEffect(() => {
-    console.log("recentProducts", recentProducts);
-  }, [recentProducts]);
+  const removeItemFromCart = (productId: string) => {
+    /*
+      Since I'm working with a fake / mocked api,
+      the removed cart products won't actually be removed from the cart.
+    */
+    const updatedProducts = recentProducts.filter(
+      (product: IProduct) => product.id !== productId
+    );
+    setRecentProducts(updatedProducts);
+    dispatch(
+      updateCartStart(getDefaultUserId(), getDefaultDate(), [
+        {
+          productId,
+          quantity: 0,
+        },
+      ])
+    );
+  };
 
   return (
     <>
       {userCartsLoading || singleCartLoading || allProductsLoading ? (
         <SpinContainer />
       ) : (
-        <StProductsContainer>
+        <StProductsContainer gutter={[0, 16]}>
           <Col span={24}>
-            {recentProducts?.length > 0 ? (
+            {recentProducts?.length > 0 && !singleCartLoading ? (
               <List
                 itemLayout="horizontal"
                 dataSource={recentProducts}
                 renderItem={(item) => (
-                  <List.Item key={item?.id}>
-                    <List.Item.Meta
-                      avatar={<Avatar src={item?.image} />}
-                      title={
-                        <a
-                          onClick={() => {
-                            navigate(`/produto/${item?.id}`);
+                  <Row align="middle">
+                    <Col span={20}>
+                      <List.Item key={item?.id}>
+                        <List.Item.Meta
+                          avatar={<Avatar src={item?.image} />}
+                          title={
+                            <a
+                              onClick={() => {
+                                navigate(`/produto/${item?.id}`);
+                              }}
+                            >
+                              {item?.title}
+                            </a>
+                          }
+                          description={item?.description}
+                          style={{
+                            textAlign: "start",
                           }}
-                        >
-                          {item?.title}
-                        </a>
-                      }
-                      description={item?.description}
-                      style={{
-                        textAlign: "start",
-                      }}
-                    />
-                  </List.Item>
+                        />
+                        <Button type="primary" />
+                      </List.Item>
+                    </Col>
+                    <Col span={4}>
+                      <Button
+                        type="primary"
+                        danger
+                        onClick={() => {
+                          removeItemFromCart(item?.id);
+                        }}
+                      >
+                        Remover
+                      </Button>
+                    </Col>
+                  </Row>
                 )}
               />
             ) : (
-              <SpinContainer />
+              <p>Não há itens no carrinho :(</p>
             )}
+          </Col>
+          <Col>
+            <Button type="primary" onClick={() => navigate("/checkout")}>
+              Finalizar compra
+            </Button>
           </Col>
         </StProductsContainer>
       )}
