@@ -1,6 +1,6 @@
 A simple store that I developed using React with Redux / Redux Saga for state management, Typescript, Styled Components and the React Testing Library.
 
-# [LIVE DEMO](https://ericsonwillians.github.io/loja_simples/):
+# [LIVE DEMO](https://ericsonwillians.github.io/loja_simples/)
 
 ###### Some of the routes are in Portuguese, but the whole code in general is in English.
 
