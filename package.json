@@ -17,6 +17,7 @@
     "@types/styled-components": "^5.1.25",
     "antd": "^4.19.5",
     "axios": "^0.26.1",
+    "gh-pages": "^3.2.3",
     "install": "^0.13.0",
     "moment": "^2.29.2",
     "react": "^18.0.0",
@@ -33,6 +34,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "nuke:cache": "rm -rf ./node_modules/.cache"
