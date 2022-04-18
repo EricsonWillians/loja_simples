@@ -2,6 +2,8 @@ A simple store that I developed using React with [Redux](https://redux.js.org/) 
 
 # [LIVE DEMO](https://ericsonwillians.github.io/loja_simples/)
 
+#### I've added the .env file since the api base URL is there, but in a real production environment one shouldn't add the .env file to the repository
+
 ###### Some of the routes are in Portuguese, but the whole code in general is in English.
 
 ## Available Scripts
